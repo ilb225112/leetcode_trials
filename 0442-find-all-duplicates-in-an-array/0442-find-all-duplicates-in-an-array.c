@@ -3,15 +3,17 @@
  */
 int* findDuplicates(int* nums, int numsSize, int* returnSize) {
     int* res =(int*)malloc(sizeof(int)*(numsSize/2 + 1));
-    bool* seen=(bool*)calloc(numsSize+1,sizeof(bool));
     *returnSize=0;
 
-    for(int i=0;i<numsSize;i++)
-        if(seen[nums[i]])
-            res[(*returnSize)++]=nums[i];
-        else
-            seen[nums[i]]=1;
+    int bitmap[(100001/32)+1]={0};
     
-    free(seen);
+    for(int i=0;i<numsSize;i++) {
+        int idx=nums[i]/32;
+        int bit=nums[i]%32;
+        if (bitmap[idx]&(1 << bit))
+            res[(*returnSize)++] = nums[i];
+        else
+            bitmap[idx]|=(1<< bit);
+    }
     return res;
 }
