@@ -1,6 +1,8 @@
 int missingNumber(int* nums, int numsSize) {
-    int sum=(numsSize*(numsSize+1))/2;
-    for(int i=0;i<numsSize;i++)
-        sum-=nums[i];
-    return sum;
+    int res=0;
+    for(int i=0;i<numsSize;i++){
+        res^=nums[i];
+        res^=(i+1);
+    }
+    return res;
 }
