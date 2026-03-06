@@ -1,3 +1,5 @@
 bool checkOnesSegment(char* s) {
-    return strstr(s,"01")==NULL;
+    while(*s =='1')s++;
+    while(*s=='0')s++;
+    return *s=='\0';
 }
