@@ -1,5 +1,5 @@
 int maxFreqSum(char* s) {
-    int* cnt=calloc(26,sizeof(int));
+    int cnt[26]={0};
     int len=strlen(s);
 
     for(int i=0;i<len;i++){
@@ -13,6 +13,5 @@ int maxFreqSum(char* s) {
         else
             maxc=(maxc+cnt[i]+abs(maxc-cnt[i]))/2;
     }
-    free(cnt);
     return maxc+maxo;
 }
