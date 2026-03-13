@@ -6,13 +6,9 @@ int* findWordsContaining(char** words, int wordsSize, char x, int* returnSize) {
     *returnSize=0;
 
     for(int i=0;i<wordsSize;i++){
-        int len=strlen(words[i]);
-        for(int j=0;j<len;j++){
-            if(words[i][j]==x){
+            if(strchr(words[i],x)){
                 res[(*returnSize)++]=i;
-                break;
             }
         }
-    }
     return res;
 }
