@@ -4,15 +4,14 @@
 #endif
 
 int countConsistentStrings(char * allowed, char ** words, int wordsSize){
-    int count=0,mask=0;
-
+    int count=0;
+    bool isa[27]={0};
     while(*allowed)
-        mask|=1<<(*allowed++ -'a');
-
+        isa[*allowed++ -'a']=1;
     for(int i=0;i<wordsSize;i++){
         int l1=strlen(words[i]),j=0;
         for(;j<l1;j++){
-            if(!(mask & (1 << (words[i][j]- 'a'))))
+            if(!isa[words[i][j]-'a'])
                 break;
         }
         if(j==l1) count++;
