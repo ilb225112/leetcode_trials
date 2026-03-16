@@ -1,22 +1,29 @@
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
+
+typedef struct{
+    char* name;
+    int height;
+}Person;
+
+int comp(const void* a, const void* b){
+    return ((Person*)b)->height - ((Person*)a)->height;
+}
+
 char** sortPeople(char** names, int namesSize, int* heights, int heightsSize, int* returnSize) {
-    //selection sort
-    *returnSize=namesSize;
-    for(int i=0;i<namesSize-1;i++){
-        int maxidx=i;
-        for(int j=i+1;j<namesSize;j++){
-            if(heights[j]>heights[maxidx])
-                maxidx=j;
-        }
-        int temp=heights[i];
-        heights[i]=heights[maxidx];
-        heights[maxidx]=temp;
-        
-        char* tempN = names[i];
-        names[i]=names[maxidx];
-        names[maxidx]=tempN;
+    Person* arr= malloc(sizeof(Person)*namesSize);
+    for(int i=0;i<namesSize;i++){
+        arr[i].name = names[i];
+        arr[i].height = heights[i];
     }
-    return names;
+    qsort(arr,namesSize,sizeof(Person),comp);
+
+    char** res= malloc(sizeof(char*)*namesSize);
+    for(int i=0;i<namesSize;i++){
+        res[i] = arr[i].name;
+    }
+    *returnSize = namesSize;
+    free(arr);
+    return res;
 }
