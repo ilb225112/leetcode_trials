@@ -1,9 +1,6 @@
 bool match(char* a, char* b){
-    int n=strlen(a);
-    if(n !=strlen(b)) return 0;
-    for(int i=0;i<n;i++) {
-        if(a[i]!=b[n-1-i]) return 0;
-    }
+    if(*a != *(b+1)) return 0;
+    if(*(a+1)!=*b) return 0;
     return 1;
 }
 
