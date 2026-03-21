@@ -1,7 +1,5 @@
 bool match(char* a, char* b){
-    if(*a != *(b+1)) return 0;
-    if(*(a+1)!=*b) return 0;
-    return 1;
+    return (*a==*(b+1) && *(a+1) == *b);
 }
 
 int maximumNumberOfStringPairs(char** words, int wordsSize) {
@@ -19,5 +17,6 @@ int maximumNumberOfStringPairs(char** words, int wordsSize) {
             }
         }
     }
+    free(idx);
     return res;
 }
