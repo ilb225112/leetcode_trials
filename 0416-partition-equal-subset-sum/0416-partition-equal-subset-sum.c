@@ -12,6 +12,7 @@ bool canPartition(int* nums, int numsSize) {
         int num =nums[i];
         for (int j=sum;j>=num;j--){
             dp[j]=dp[j] || dp[j - num];
+            if(dp[0]) return 1;
         }
     }
     
