@@ -16,7 +16,5 @@ bool canPartition(int* nums, int numsSize) {
         }
     }
     
-    bool res = dp[sum];
-    free(dp);
-    return res;
+    return dp[sum];
 }
