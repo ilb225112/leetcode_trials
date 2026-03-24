@@ -4,16 +4,23 @@
 int* minOperations(char* boxes, int* returnSize) {
     int n=strlen(boxes);
     *returnSize =n;
-    int* res =malloc(n*sizeof(int));
+
+    int* res =calloc(n, sizeof(int));
+    int count =0;
+    int ops =0;
 
     for (int i=0;i<n;i++){
-        res[i] =0;
-        for (int j=0;j<n;j++){
-            if (boxes[j]=='1') {
-                res[i]+=abs(i-j);
-            }
-        }
+        res[i] +=ops;
+        if (boxes[i]=='1') count++;
+        ops+=count;
     }
 
+    count = 0;
+    ops = 0;
+    for (int i=n-1;i>= 0;i--){
+        res[i] +=ops;
+        if (boxes[i]=='1') count++;
+        ops +=count;
+    }
     return res;
 }
