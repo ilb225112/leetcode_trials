@@ -8,6 +8,7 @@ int maxDistinct(char* s) {
             res++;
         }
         s++;
+        if(res==26) return 26;
     }
     return res;
 }
