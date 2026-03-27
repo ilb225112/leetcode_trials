@@ -2,31 +2,21 @@
  * Note: The returned array must be malloced, assume caller calls free().
  */
 char** fizzBuzz(int n, int* returnSize) {
-    char** res = malloc(n * sizeof(char*));
+    char** answer = (char**)malloc(n * sizeof(char*));
     *returnSize = n;
 
-    for(int i = 0; i < n; i++) {
-        res[i] = malloc(6);
-        sprintf(res[i], "%d", i + 1);
-    }
+    for (int i=1;i<=n;i++) {
+        answer[i-1]=(char*)malloc(9*sizeof(char)); 
 
-    for(int i = 2; i < n; i += 3) {
-        free(res[i]);
-        res[i] = malloc(5);
-        strcpy(res[i], "Fizz");
+        if (i%15==0) {
+            strcpy(answer[i-1],"FizzBuzz");
+        } else if (i%3==0) {
+            strcpy(answer[i-1],"Fizz");
+        } else if (i%5==0){
+            strcpy(answer[i-1],"Buzz");
+        } else {
+            sprintf(answer[i-1],"%d",i);
+        }
     }
-
-    for(int i = 4; i < n; i += 5) {
-        free(res[i]);
-        res[i] = malloc(5);
-        strcpy(res[i], "Buzz");
-    }
-
-    for(int i = 14; i < n; i += 15) {
-        free(res[i]);
-        res[i] = malloc(9);
-        strcpy(res[i], "FizzBuzz");
-    }
-
-    return res;
+    return answer;
 }
