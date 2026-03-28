@@ -1,10 +1,19 @@
+void reverse(char *s, int start, int end) {
+    while (start < end) {
+        char temp = s[start];
+        s[start] = s[end];
+        s[end] = temp;
+        start++;
+        end--;
+    }
+}
+
 char* getEncryptedString(char* s, int k) {
-    int len=strlen(s);
-    char* res = malloc(len+1);
+    int n=strlen(s);
+    k%=n;
 
-    for(int i=0;i<len;i++)
-        res[i]=s[(i+k)%len];
-    res[len]='\0';
-
-    return res;
+    reverse(s,0,k-1);     
+    reverse(s,k,n-1);     
+    reverse(s,0,n-1);  
+    return s;
 }
