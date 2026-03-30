@@ -4,20 +4,20 @@
 int* pivotArray(int* nums, int numsSize, int pivot, int* returnSize) {
     int* res=malloc(sizeof(int)*numsSize);
 
-    int l=0,r=numsSize-1;
-
-    for(int i=0,j=numsSize-1;i<numsSize;i++,j--){
-        if(nums[i]<pivot){
-            res[l++]=nums[i];
-        }
-        if(nums[j]>pivot){
-            res[r--]=nums[j];
-        }
+    int less=0,equal=0;
+    for(int i=0;i<numsSize;i++){
+        if(nums[i]<pivot) less++;
+        else if(nums[i]==pivot) equal++;
     }
 
-    while(l<=r){
-        res[l++]=pivot;
+    int l=0;
+    int m=less;
+    int r=less+equal;
+    for(int i=0;i<numsSize;i++){
+        if(nums[i]<pivot) res[l++]=nums[i];
+        else if(nums[i]==pivot) res[m++]=nums[i];
+        else res[r++]=nums[i];
     }
-    *returnSize=numsSize;
+    *returnSize = numsSize;
     return res;
 }
