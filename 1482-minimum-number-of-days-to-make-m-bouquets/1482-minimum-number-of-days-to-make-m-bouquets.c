@@ -1,14 +1,18 @@
-int boqcnt(int* arr,int days,int size,int k){
-    int res=0,cnt=0;
-    for(int i=0;i<size;i++){
-        if(arr[i]<=days)
+bool boqcnt(int* arr, int days, int size, int k, int m) {
+    int res = 0, cnt = 0;
+    for (int i = 0; i < size; i++) {
+        if (arr[i] <= days) {
             cnt++;
-        else{
-            res+=cnt/k;
-            cnt=0;
-        }
+            if (cnt == k) {
+                res++;
+                cnt = 0;
+            }
+        }else
+            cnt = 0;
+
+        if (res >= m) return true;
     }
-    return res+cnt/k;
+    return false;
 }
 
 int minDays(int* bloomDay, int bloomDaySize, int m, int k) {
@@ -20,14 +24,12 @@ int minDays(int* bloomDay, int bloomDaySize, int m, int k) {
         if(bloomDay[i]>r) r=bloomDay[i];
     }
 
-    int ans=-1;
     while(l<=r){
         int mid = l+((r-l)>>1); 
-        if(boqcnt(bloomDay,mid,bloomDaySize,k)>=m){
-            ans=mid;
+        if(boqcnt(bloomDay,mid,bloomDaySize,k,m)){
             r=mid-1;
         }else
             l=mid+1;
     }
-    return ans;
+    return l;
 }
