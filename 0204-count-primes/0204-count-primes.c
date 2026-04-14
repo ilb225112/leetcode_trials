@@ -10,5 +10,7 @@ int countPrimes(int n) {
                 isPrime[j]=1;
         }
     }
+
+    free(isPrime);
     return count;
 }
