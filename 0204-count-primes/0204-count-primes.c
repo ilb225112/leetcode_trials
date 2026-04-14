@@ -1,5 +1,5 @@
 int countPrimes(int n) {
-    if(n<2) return 0;
+    if(n<=2) return 0;
     bool* isPrime=calloc(n,sizeof(bool));
     int count=1;
 
