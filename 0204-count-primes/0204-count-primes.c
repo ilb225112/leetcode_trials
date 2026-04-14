@@ -6,7 +6,9 @@ int countPrimes(int n) {
     for(int i=3;i<n;i+=2){
         if(!isPrime[i]){
             count++;
-            for(int j=i;j<n;j+=(2*i))
+
+        if (i<=n/i)
+            for(int j=i*i;j<n;j+=(2*i))
                 isPrime[j]=1;
         }
     }
