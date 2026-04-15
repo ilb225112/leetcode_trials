@@ -6,8 +6,12 @@
  * };
  */
 int gcd(int m,int n){
-    if(n==0) return m;
-    return gcd(n,m%n);
+    while (n != 0) {
+        int temp = n;
+        n = m % n;
+        m = temp;
+    }
+    return m;
 }
 
 
