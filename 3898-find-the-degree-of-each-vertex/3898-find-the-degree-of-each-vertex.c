@@ -5,11 +5,13 @@ int* findDegrees(int** matrix, int matrixSize, int* matrixColSize, int* returnSi
     int* res=calloc(matrixSize,sizeof(int));
     *returnSize=matrixSize;
 
-    for(int i=0;i<matrixSize;i++)
-        for(int j=i+1;j<matrixSize;j++){
-            res[i]+=matrix[i][j];
-            res[j]+=matrix[i][j];
-        }
-    
+    for(int i=0;i<matrixSize;i++){
+        int* cache = matrix[i];
+        for(int j=i+1;j<matrixSize;j++)
+            if(cache[j]){
+                res[i]++;
+                res[j]++;
+            }    
+    }    
     return res;
 }
