@@ -1,9 +1,8 @@
 int furthestDistanceFromOrigin(char* moves) {
     int count=0,dcnt=0;
     while(*moves){
-        if(*moves=='L') count++;
-        else if(*moves=='R') count--;
-        else dcnt++;
+        if(*moves=='_') dcnt++;
+        else count+=(79 - *moves)/3;
         moves++;
     }
     
