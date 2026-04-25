@@ -1,19 +1,28 @@
 /**
  * Note: The returned array must be malloced, assume caller calls free().
  */
-int cmp(const void* a, const void* b){
-    return *(int*)a-*(int*)b;
-}
+
 
 int* numberGame(int* nums, int numsSize, int* returnSize) {
-    qsort(nums,numsSize,sizeof(int),cmp);
+    int count[101]={0};
+    for(int i=0;i<numsSize;i++)
+        count[nums[i]]++;
+
+    int* res=malloc(sizeof(int)*numsSize);
     *returnSize=numsSize;
 
-    for(int i=1;i<numsSize;i+=2){
-        int temp=nums[i-1];
-        nums[i-1]=nums[i];
-        nums[i]=temp;
+    int k=0,flag=-1;
+    for(int i=1;i<=100;i++){
+        while(count[i]>0){
+            if(flag==-1)
+                flag=i;
+            else{
+                res[k++]=i;
+                res[k++]=flag;
+                flag=-1;
+            }
+        count[i]--;
+        }
     }
-
-    return nums;
+    return res;
 }
