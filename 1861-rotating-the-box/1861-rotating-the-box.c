@@ -9,32 +9,27 @@ char** rotateTheBox(char** boxGrid, int boxGridSize, int* boxGridColSize, int* r
 
     *returnSize=rows;
     *returnColumnSizes=malloc(sizeof(int)*rows);
-    for(int i=0;i<rows;i++){
-        (*returnColumnSizes)[i]=cols;
-    }
+        
 
     char **res=malloc(sizeof(char*)*rows);
     for(int i=0;i<rows;i++){
+        (*returnColumnSizes)[i]=cols;
         res[i]=malloc(sizeof(char)*(cols+1));
-        for(int j=0;j<cols;j++)
-            res[i][j]=boxGrid[cols-1-j][i];
+        memset(res[i], '.', cols);
         res[i][cols]='\0';
     }
 
-    for(int j=0;j<cols;j++){
+    for(int i=0;i<cols;i++){
         int swapPos=rows-1;
-        for(int i=rows-1;i>=0;i--){
-            if(res[i][j]=='*')
-                swapPos=i-1;
-            else if(res[i][j]=='#'){
-                if(swapPos!=i){
-                    res[i][j]='.';
-                    res[swapPos][j]='#';
-                }
+        for(int j=rows-1;j>=0;j--){
+            if(boxGrid[i][j]=='#'){
+                res[swapPos][cols-i-1]='#';
                 swapPos--;
+            }else if(boxGrid[i][j]=='*'){
+                res[j][cols-i-1]='*';
+                swapPos=j-1;
             }
         }
     }
-
     return res;
 }
