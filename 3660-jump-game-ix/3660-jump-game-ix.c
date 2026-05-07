@@ -25,6 +25,5 @@ int* maxValue(int* nums, int numsSize, int* returnSize) {
             res[i]=pre[i];
     }
 
-    free(pre);free(suf);
     return res;
 }
