@@ -5,10 +5,7 @@ int* separateDigits(int* nums, int numsSize, int* returnSize) {
     int size=0;
     for(int i=0;i<numsSize;i++){
         int temp=nums[i];
-        while(temp){
-            size++;
-            temp/=10;
-        }
+        size+=(int)log10(temp)+1;
     }
     *returnSize=size;
     int* ans=(int*)malloc(sizeof(int*)*size);
