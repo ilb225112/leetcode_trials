@@ -6,8 +6,7 @@ int minOperations(int* nums, int numsSize){
     for(int i=1;i<numsSize;i++){
         if(prev>=nums[i]){
             res+=prev+1-nums[i];
-            nums[i]=prev+1;
-            prev=nums[i];
+            prev=prev+1;
         }else
             prev=nums[i];
     }
