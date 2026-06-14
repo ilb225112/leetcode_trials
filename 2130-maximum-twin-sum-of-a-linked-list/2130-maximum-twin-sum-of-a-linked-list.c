@@ -12,20 +12,21 @@ int pairSum(struct ListNode* head) {
         slow=slow->next;
         fast=fast->next->next;
     }
-    NODE* prev=NULL,*curr=slow,*nxt=slow;
-    while(nxt){
-        nxt=curr->next;
-        curr->next=prev;
-        prev=curr;
-        curr=nxt;
+    NODE* prev=NULL,*nxt=NULL;
+    while(slow){
+        nxt=slow->next;
+        slow->next=prev;
+        prev=slow;
+        slow=nxt;
     }
-    
+
        
 
-    int res=0;
+    int res=0,sum=0;
     slow=head;
     while(prev){
-        res=fmax(res,slow->val+prev->val);
+        sum=slow->val+prev->val;
+        res=(sum>res)?sum:res;
         slow=slow->next;
         prev=prev->next;
     }
