@@ -5,11 +5,12 @@
  */
 int** mergeArrays(int** nums1, int nums1Size, int* nums1ColSize, int** nums2, int nums2Size, int* nums2ColSize, int* returnSize, int** returnColumnSizes) {
     int** res=malloc(sizeof(int*)*(nums1Size+nums2Size));
+    int* data=malloc(sizeof(int)*2*(nums1Size+nums2Size));
     *returnSize=0;
 
     int p=0,q=0,idx=0;
     while(p<nums1Size && q<nums2Size){
-        res[idx]=malloc(sizeof(int)*2);
+        res[idx]=&data[idx*2];
         if(nums1[p][0]==nums2[q][0]){
             res[idx][0]=nums1[p][0];
             res[idx][1]=nums1[p][1]+nums2[q][1];
@@ -26,14 +27,14 @@ int** mergeArrays(int** nums1, int nums1Size, int* nums1ColSize, int** nums2, in
         idx++;
     }
     while(p<nums1Size){
-        res[idx]=malloc(sizeof(int)*2);
+        res[idx]=&data[idx*2];
         res[idx][0]=nums1[p][0];
         res[idx][1]=nums1[p][1];
         p++;idx++;
     }
 
     while(q<nums2Size){
-        res[idx]=malloc(sizeof(int)*2);
+        res[idx]=&data[idx*2];
         res[idx][0]=nums2[q][0];
         res[idx][1]=nums2[q][1];
         q++;idx++;
