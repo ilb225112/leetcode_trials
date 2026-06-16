@@ -15,13 +15,14 @@ char* processStr(char* s) {
         } 
         else if(ch=='#'){
             int curr_len = idx;
-            memmove(res+idx,res,curr_len);
+            memcpy(res+idx,res,curr_len);
             idx+=curr_len;
         }else if(ch=='%'){
-            for (int j = 0; j < idx / 2; j++) {
-                char temp=res[idx-j-1];
-                res[idx-j-1]=res[j];
-                res[j] = temp;
+            int l=0,r=idx-1;
+            while(l<r){
+                char temp=res[l];
+                res[l++]=res[r];
+                res[r--] = temp;
             }
         } else
             res[idx++] = ch;
