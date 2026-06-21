@@ -13,11 +13,16 @@ int maxIceCream(int* costs, int costsSize, int coins) {
         freq[costs[i]-min]++;
     
     for(int i=0;i<range;i++){
-        while(freq[i]>0 && coins>=(i+min)){
-                coins-=(i+min);
-                res++;
-                freq[i]--;;
-            }
+        if(freq[i]==0) continue;
+        
+        int temp=i+min;
+        if(coins<temp) break;
+        
+        int cnt=coins/temp;
+        if(cnt>freq[i]) cnt=freq[i];
+        
+        res+=cnt;
+        coins-=cnt*temp;
         }
     free(freq);
     return res;
