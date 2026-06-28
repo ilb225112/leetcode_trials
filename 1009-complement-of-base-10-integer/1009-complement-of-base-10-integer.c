@@ -1,5 +1,0 @@
-int bitwiseComplement(int n) {
-    if(n==0) return 1;
-    int mask = (1<<(int)(log2(n)+1))-1;
-    return n^mask;
-}

@@ -1,9 +1,0 @@
-char* findDifferentBinaryString(char** nums, int numsSize) {
-    char* res=malloc(sizeof(char)*(numsSize+1));
-    res[numsSize]='\0';
-
-    for(int i=0;i<numsSize;i++){
-        res[i]=(nums[i][i]=='0')?'1':'0';
-    }
-    return res;
-}
