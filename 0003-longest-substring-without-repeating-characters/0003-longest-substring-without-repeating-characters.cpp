@@ -9,7 +9,7 @@ public:
             char ch=s[r];
             if(lastPos[ch]!=-1){
                 int pos=lastPos[ch];
-                while(l<=pos) lastPos[s[l++]]=-1;
+                l=max(lastPos[ch]+1,l);
                 lastPos[ch]=-1;
             }else{
                 lastPos[ch]=r;
