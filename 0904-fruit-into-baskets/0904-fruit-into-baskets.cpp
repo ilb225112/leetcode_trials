@@ -1,23 +1,36 @@
 class Solution {
 public:
     int totalFruit(vector<int>& fruits) {
-        unordered_map<int,int> uniq;
         int n=fruits.size();
-        int l=0,r=0,maxlen=0;
+        int cnt1=0,cnt2=0;
+        int a=fruits[0],b=-1,r=1,l=0;
+        int maxlen=1;
 
         while(r<n){
-            uniq[fruits[r]]++;
-            if(uniq.size()>2){
-                uniq[fruits[l]]--;
-                if(uniq[fruits[l]]==0)
-                    uniq.erase(fruits[l]);
-                l++;
+            int s=fruits[r];
+            if(s!=a && b==-1){
+                b=s;
+                cnt2=r;
+            }else{
+                if(s==a){
+                    cnt1=r;
+                }else if(s==b){
+                    cnt2=r;
+                }else{
+                    if(cnt1>cnt2){
+                        l=cnt2+1;
+                        cnt2=r;
+                        b=s;
+                    }else{
+                        l=cnt1+1;
+                        cnt1=r;
+                        a=s;
+                    }
+                }
             }
-            if(uniq.size()<=2)
-                maxlen=max(r-l+1,maxlen);
+            maxlen=max(maxlen,r-l+1);
             r++;
         }
-        
         return maxlen;
     }
 };
