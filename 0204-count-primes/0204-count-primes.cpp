@@ -1,15 +1,21 @@
 class Solution {
 public:
     int countPrimes(int n) {
-        vector<bool> isVisited(n);
-        int count=0;
+        if(n<=2) return 0;
 
-        for(int i=2;i<n;i++){
+        vector<bool> isVisited(n);
+        int count=1;
+        int i;
+
+        for(i=3;i*i<=n;i+=2){
             if(!isVisited[i]){
                 count++;
                 for(int j=i;j<n;j+=i)
                     isVisited[j]=1;
             }
+        }
+        for(;i<n;i+=2){
+            if(!isVisited[i]) count++;
         }
         return count;
     }
