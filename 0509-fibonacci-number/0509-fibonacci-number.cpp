@@ -3,9 +3,12 @@ public:
     int fib(int n) {
         if(n<=1) return n;
         vector<int> table(n+1,0);
-        table[1]=1;
-        for(int i=2;i<=n;i++)
-            table[i]=table[i-1]+table[i-2];
-        return table[n];
+        int a=0,b=1,csum=0;
+        for(int i=2;i<=n;i++){
+            csum=a+b;
+            a=b;
+            b=csum;
+        }
+        return csum;
     }
 };
