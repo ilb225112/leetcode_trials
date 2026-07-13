@@ -1,12 +1,15 @@
 class Solution {
 public:
-    int maxProfit(vector<int>& v) {
-        int res=0,m=v[0];
+    int maxProfit(vector<int>& prices) {
+        int profit=0;
+        int cp=prices[0];
 
-        for(int val:v){
-            res=max(res,val-m);
-            m=min(m,val);
+        for(int sp:prices){
+            int diff=sp-cp;
+            if(diff>profit) profit=diff;
+            if(sp<cp) cp=sp;
         }
-        return res;
+        
+        return profit;
     }
 };
