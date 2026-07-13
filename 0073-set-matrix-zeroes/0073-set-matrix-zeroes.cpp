@@ -1,13 +1,25 @@
 class Solution {
 public:
+    #define FOR(i,a,n) for(i=a;i<n;i++)
     void setZeroes(vector<vector<int>>& matrix) {
-        int m=matrix.size(), n=matrix[0].size();
-        int fr=0,fc=0;
-        for(int i=0;i<n;i++) if(!matrix[0][i]){fr=1;break;}
-        for(int i=0;i<m;i++) if(!matrix[i][0]){fc=1;break;}
+        int rows=matrix.size();
+        int cols=matrix[0].size();
 
-        for(int i=1;i<m;i++){
-            for(int j=1;j<n;j++){
+        int i,j;
+        bool frow=0,fcol=0;
+
+        FOR(j,0,cols) if(matrix[0][j]==0){
+            frow=1;
+            break;
+        }
+
+        FOR(i,0,rows) if(matrix[i][0]==0){
+            fcol=1;
+            break;
+        }
+
+        FOR(i,1,rows){
+            FOR(j,1,cols){
                 if(matrix[i][j]==0){
                     matrix[0][j]=0;
                     matrix[i][0]=0;
@@ -15,17 +27,19 @@ public:
             }
         }
 
-        for(int i=1;i<m;i++){
+        FOR(i,1,rows){
             if(matrix[i][0]==0)
-                for(int j=1;j<n;j++) matrix[i][j]=0;
+                FOR(j,1,cols)
+                    matrix[i][j]=0;
         }
 
-        for(int i=1;i<n;i++){
-            if(matrix[0][i]==0)
-                for(int j=1;j<m;j++) matrix[j][i]=0;
+        FOR(j,1,cols){
+            if(matrix[0][j]==0)
+                FOR(i,1,rows)
+                    matrix[i][j]=0;
         }
 
-        if(fr) for(int i=0;i<n;i++) matrix[0][i]=0;
-        if(fc) for(int i=0;i<m;i++) matrix[i][0]=0;
+        if(frow) FOR(j,0,cols) matrix[0][j]=0;
+        if(fcol) FOR(i,0,rows) matrix[i][0]=0;
     }
 };
