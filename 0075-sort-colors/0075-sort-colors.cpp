@@ -2,8 +2,6 @@ class Solution {
 public:
     void sortColors(vector<int>& nums) {
         int l=0,r=nums.size()-1;
-        while(l<=r && nums[l]==0) l++;
-        while(r>=l && nums[r]==2) r--;
         int travel=l;
 
         while(travel<=r){
