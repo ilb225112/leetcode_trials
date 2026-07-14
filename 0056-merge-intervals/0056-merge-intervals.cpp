@@ -10,10 +10,19 @@ public:
         res.push_back(intervals[0]);
 
         for(int i=1;i<m;i++){
-            if(res.back()[1]>=intervals[i][0]){
-                res.back()[1]=max(res.back()[1],intervals[i][1]);
-            }else{
+            int end=res.back()[1];
+            int j=i;
+            
+            while(j<m && end>=intervals[j][0]){
+                end=max(end,intervals[j][1]);
+                j++;
+            }
+            
+            if(i==j)
                 res.push_back(intervals[i]);
+            else{
+                res.back()[1]=end;
+                i=j-1;
             }
         }
         return res;
