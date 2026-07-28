@@ -12,7 +12,7 @@
 class Solution {
 public:
     int heightdiff(TreeNode* root,int &diff){
-        if(!root) return 0;
+        if(!root || diff>1) return 0;
         int lh=heightdiff(root->left,diff);
         int rh=heightdiff(root->right,diff);
         diff=max(diff,abs(lh-rh));
