@@ -11,29 +11,20 @@
  */
 class Solution {
 public:
-    int ilen,plen;
+    int ilen;
 
-    TreeNode* helper(vector<int> &pre, int &pidx, unordered_map<int,int> &m,int left, int right){
-        if(left>=right || pidx==plen) return nullptr;
-        
-        TreeNode* root=new TreeNode(pre[pidx]);
-        int temp=right;
-        right=m[root->val];
-        pidx++;
-
-        root->left=helper(pre,pidx,m,left,right);
-        root->right=helper(pre,pidx,m,right+1,temp);
+    TreeNode* helper(vector<int>& preorder, vector<int>& inorder, int &pidx,int &iidx,int stop){
+        if(iidx>=ilen || inorder[iidx]==stop) return nullptr;
+        TreeNode* root=new TreeNode(preorder[pidx++]);
+        root->left=helper(preorder,inorder,pidx,iidx,root->val);
+        iidx++;
+        root->right=helper(preorder,inorder,pidx,iidx,stop);
         return root;
     }
 
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        unordered_map<int,int> m; int idx=0;
-        for(int i: inorder)
-            m[i]=idx++;
-        
+        int pidx=0,iidx=0;
         ilen=inorder.size();
-        plen=preorder.size();
-        int left=0,right=ilen,pidx=0;
-        return helper(preorder,pidx,m,left,right);
+        return helper(preorder,inorder,pidx,iidx,INT_MAX);
     }
 };
