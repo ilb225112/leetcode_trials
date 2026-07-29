@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    TreeNode* helper(map<int,int> &m, vector<int>& postorder, int& pidx, int l, int r){
+    TreeNode* helper(unordered_map<int,int> &m, vector<int>& postorder, int& pidx, int l, int r){
         if(r<l || pidx<0) return nullptr;
 
         TreeNode* root= new TreeNode(postorder[pidx--]);
@@ -23,7 +23,7 @@ public:
     }
 
     TreeNode* buildTree(vector<int>& inorder, vector<int>& postorder) {
-        map<int,int> m;
+        unordered_map<int,int> m;
         int idx=0;
         for(int i:inorder)
             m[i]=idx++;
