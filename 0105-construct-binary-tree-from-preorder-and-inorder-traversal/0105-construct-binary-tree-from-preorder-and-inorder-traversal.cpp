@@ -13,7 +13,7 @@ class Solution {
 public:
     int ilen,plen;
 
-    TreeNode* helper(vector<int> &pre, int &pidx, map<int,int> &m,int left, int right){
+    TreeNode* helper(vector<int> &pre, int &pidx, unordered_map<int,int> &m,int left, int right){
         if(left>=right || pidx==plen) return nullptr;
         
         TreeNode* root=new TreeNode(pre[pidx]);
@@ -27,7 +27,7 @@ public:
     }
 
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
-        map<int,int> m; int idx=0;
+        unordered_map<int,int> m; int idx=0;
         for(int i: inorder)
             m[i]=idx++;
         
