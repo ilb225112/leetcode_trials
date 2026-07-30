@@ -1,8 +1,6 @@
 class Solution {
 public:
-    #define VB vector<bool>&
-
-    void solve(vector<vector<string>> &res,vector<string> &temp, int n, int col,VB lr, VB ud, VB ld){
+    void solve(vector<vector<string>> &res,vector<string> &temp, int n, int col,bool lr[], bool ud[], bool ld[]){
         if(col==n){
             res.push_back(temp);
             return;
@@ -23,7 +21,9 @@ public:
     vector<vector<string>> solveNQueens(int n) {
         vector<vector<string>> res;
         vector<string> temp;
-        vector<bool> lr(n,0), ud(2*n-1,0), ld(2*n-1,0);
+        bool lr[9] = {0};
+        bool ud[17] = {0};
+        bool ld[17] = {0};
         string s(n,'.');
         for(int i=0;i<n;i++){
             temp.push_back(s);
