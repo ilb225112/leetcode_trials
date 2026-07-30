@@ -1,25 +1,20 @@
 class Solution {
 public:
-    bool isSafe(int col,int row, vector<string> &res,int n){
-        int dr=row,dc=col;
-        for(int i=0;i<col;i++) if(res[row][i]=='Q') return 0;
-        while(--row>=0 && --col>=0)  if(res[row][col]=='Q') return 0;
-        row=dr,col=dc;
-        while(++row<n && --col>=0) if(res[row][col]=='Q') return 0;
-        return 1;        
-    }
+    #define VB vector<bool>&
 
-    void solve(vector<vector<string>> &res,vector<string> &temp, int n, int col){
+    void solve(vector<vector<string>> &res,vector<string> &temp, int n, int col,VB lr, VB ud, VB ld){
         if(col==n){
             res.push_back(temp);
             return;
         }
 
         for(int i=0;i<n;i++){
-            if(isSafe(col,i,temp,n)){
+            if(lr[i]==0 && ud[n-1+col-i]==0 && ld[i+col]==0){
+                lr[i]=1,ud[n-1+col-i]=1,ld[i+col]=1;
                 temp[i][col]='Q';
-                solve(res,temp,n,col+1);
+                solve(res,temp,n,col+1,lr,ud,ld);
                 temp[i][col]='.';
+                lr[i]=0,ud[n-1+col-i]=0,ld[i+col]=0;
             }
         }
     }
@@ -28,11 +23,12 @@ public:
     vector<vector<string>> solveNQueens(int n) {
         vector<vector<string>> res;
         vector<string> temp;
+        vector<bool> lr(n,0), ud(2*n-1,0), ld(2*n-1,0);
         string s(n,'.');
         for(int i=0;i<n;i++){
             temp.push_back(s);
         }
-        solve(res,temp,n,0);
+        solve(res,temp,n,0,lr,ud,ld);
         return res;
     }
 };
