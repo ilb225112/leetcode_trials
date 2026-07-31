@@ -33,6 +33,7 @@ public:
                 node=node->children[idx];
                 if(node->isEnd) dp[j+1]=1;
             }
+            if(dp[n]) return 1;
         }
         return dp[n];
     }
