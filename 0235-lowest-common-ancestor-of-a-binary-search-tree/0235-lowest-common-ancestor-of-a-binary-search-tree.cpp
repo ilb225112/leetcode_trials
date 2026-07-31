@@ -11,13 +11,16 @@
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if(root==p || root==q) return root;
-        int count=0;
-        count+= (root->val) < (p->val);
-        count+= (root->val) < (q->val);
+        while(root){
+            if(root==p || root==q) return root;
+            int count=0;
+            count+= (root->val) < (p->val);
+            count+= (root->val) < (q->val);
 
-        if(count==0) return lowestCommonAncestor(root->left,p,q);
-        if(count==1) return root;
-        return lowestCommonAncestor(root->right,p,q);
+            if(count==0) root=root->left;
+            else if(count==1) return root;
+            else root=root->right;
+        }
+        return nullptr;
     }
 };
