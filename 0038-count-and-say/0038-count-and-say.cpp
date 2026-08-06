@@ -23,7 +23,10 @@ public:
     }
 
     string countAndSay(int n) {
-        if(n==1) return "1";
-        return RLE(countAndSay(n-1));
+        string temp="1";
+        for(int i=1;i<n;i++){
+            temp=RLE(temp);
+        }
+        return temp;
     }
 };
