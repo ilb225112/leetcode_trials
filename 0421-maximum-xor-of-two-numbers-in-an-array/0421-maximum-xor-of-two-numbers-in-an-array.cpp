@@ -28,9 +28,9 @@ public:
     }
 
     int findMaximumXOR(vector<int>& nums) {
-        for(int i: nums) insert(i);
         int maxXor=0;
-        for(int i: nums){
+        for(int i: nums) {
+            insert(i);
             maxXor=max(maxXor,maxPossible(i));
             if(maxXor==INT_MAX) return INT_MAX;
         }
