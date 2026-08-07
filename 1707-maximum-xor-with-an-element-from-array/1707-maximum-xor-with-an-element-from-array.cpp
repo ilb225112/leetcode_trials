@@ -31,12 +31,15 @@ struct TrieNode{
         int n=queries.size(),idx=0,m=nums.size(),p=0;
         vector<int> res(n);
         sort(nums.begin(),nums.end());
-        multimap<int,pair<int,int>> inp;
+
+        vector<pair<int,pair<int,int>>> inp;
         for(auto it:queries)
-            inp.insert({it[1],{it[0],idx++}});
-        
+            inp.push_back({it[1],{it[0],idx++}});
+
+        sort(inp.begin(),inp.end());
+
         for(auto const &i: inp){
-            int a=i.first, b=i.second.first, c =i.second.second;
+            int a=i.first, b=i.second.first, c=i.second.second;
             while(p<m && nums[p]<=a) insert(nums[p++]);
             if(p==0){
                 res[c]=-1;
