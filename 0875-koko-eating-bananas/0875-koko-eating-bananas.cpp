@@ -3,7 +3,7 @@ public:
     int solve(int k,int h, vector<int>& piles){
         int reqH=0;
         for(int i:piles){
-            reqH+=((i/k)+((i%k)!=0));
+            reqH+=((i+k-1)/k);
             if(reqH>h) return 0;
         }
         return 1;
