@@ -8,10 +8,10 @@ public:
         int i=0,j=0,m=g.size(),n=s.size();
         while(i<m && j<n){
             if(g[i]<=s[j]){
-                count++;i++;j++;
-            }else{
-                i++;
+                count++;
+                j++;
             }
+            i++;
         }
         return count;
     }
